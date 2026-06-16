@@ -3,13 +3,13 @@ package com.example.helloworld
 import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        // فرض اللغة العربية بغض النظر عن لغة الجهاز
+        // فرض اللغة العربية
         val config = resources.configuration
         config.setLocale(Locale("ar"))
         resources.updateConfiguration(config, resources.displayMetrics)
@@ -17,9 +17,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val textView = findViewById<TextView>(R.id.textView)
         val button = findViewById<Button>(R.id.button)
+
         button.setOnClickListener {
-            Toast.makeText(this, "مرحباً بك في تطبيقك العربي الأول!", Toast.LENGTH_SHORT).show()
+            textView.text = "🎉 تم الضغط على الزر بنجاح!"
         }
     }
 }
