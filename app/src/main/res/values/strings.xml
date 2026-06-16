@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">تطبيقي العربي</string>
+    <string name="welcome_message">أهلاً بك في عالم البرمجة</string>
+    <string name="press_here">اضغط هنا</string>
+</resources>
