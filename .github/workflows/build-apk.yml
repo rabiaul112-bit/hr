@@ -25,24 +25,16 @@ jobs:
           api-level: 34
           build-tools: 34.0.0
 
-      - name: منح صلاحيات التنفيذ لـ gradlew
-        run: |
-          echo "distributionBase=GRADLE_USER_HOME" > gradle/wrapper/gradle-wrapper.properties
-          echo "distributionPath=wrapper/dists" >> gradle/wrapper/gradle-wrapper.properties
-          echo "distributionUrl=https\://services.gradle.org/distributions/gradle-8.2-bin.zip" >> gradle/wrapper/gradle-wrapper.properties
-          echo "zipStoreBase=GRADLE_USER_HOME" >> gradle/wrapper/gradle-wrapper.properties
-          echo "zipStorePath=wrapper/dists" >> gradle/wrapper/gradle-wrapper.properties
-          mkdir -p gradle/wrapper
-          cp $ANDROID_SDK_ROOT/tools/templates/gradle/wrapper/gradlew gradlew
-          cp $ANDROID_SDK_ROOT/tools/templates/gradle/wrapper/gradlew.bat gradlew.bat
-          cp $ANDROID_SDK_ROOT/tools/templates/gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.jar
-          chmod +x gradlew
+      - name: تثبيت Gradle 8.2
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.2
 
       - name: بناء APK النسخة التجريبية
-        run: ./gradlew assembleDebug
+        run: gradle assembleDebug
 
       - name: رفع ملف APK
         uses: actions/upload-artifact@v4
         with:
           name: تطبيقي-العربي.apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk 
